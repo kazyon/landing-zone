@@ -6,10 +6,10 @@ This repo will deploy to any subscription the following components:
                 -Network Security Group
                 -Recovery Service Vault
                 -Storage Account
-####Some of the values are harcoded:
+Some of the values are harcoded:
 location 
 
-#####Important
+Important
 The deployment code will ask the user for the name of the RG and the location where the RG will be created
 
 ##Order of execution 
