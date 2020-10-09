@@ -12,7 +12,7 @@ location
 Important
 The deployment code will ask the user for the name of the RG and the location where the RG will be created
 
-##Order of execution 
+Order of execution 
 1. Log In into Azure AD
 2. Asking the user for the name of the RG and the location where the RG will be created
 3. Creating the Network Component VNET with 2 Subnets
