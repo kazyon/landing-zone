@@ -22,19 +22,61 @@
       "properties": {
         "securityRules": [
           {
-            "name": "first_rule",
+            "name": "AllowSSH",
             "properties": {
-              "description": "This is the first rule",
-              "protocol": "Tcp",
-              "sourcePortRange": "23-45",
-              "destinationPortRange": "46-56",
-              "sourceAddressPrefix": "*",
-              "destinationAddressPrefix": "*",
-              "access": "Allow",
-              "priority": 123,
-              "direction": "Inbound"
+            "protocol": "Tcp",
+            "sourcePortRange": "*",
+            "destinationPortRange": "22",
+            "destinationAddressPrefix": "*",
+            "access": "Allow",
+            "priority": 101,
+            "direction": "Inbound",
+            "sourcePortRanges": [],
+            "destinationPortRanges": [],
+            "sourceAddressPrefixes": [
+                "64.95.224.144/32"
+            ],
+            "destinationAddressPrefixes": []
             }
-          }
+               },
+                {
+            "name": "AllowMultiplePorts",
+            "properties": {
+            "protocol": "Tcp",
+            "sourcePortRange": "*",
+            "destinationAddressPrefix": "*",
+            "access": "Allow",
+            "priority": 102,
+            "direction": "Inbound",
+            "sourcePortRanges": [],
+            "destinationPortRanges": [
+                  "3389",
+                  "5985",
+                  "5986"
+                ],
+            "sourceAddressPrefixes": [
+                  "64.95.224.144/32"
+                ],
+                "destinationAddressPrefixes": []
+            }
+          },
+            {
+            "name": "RDPfromRFA",
+            "properties": {
+            "protocol": "*",
+            "sourcePortRange": "*",
+            "destinationPortRange": "3389",
+            "sourceAddressPrefix": "64.74.40.0/24",
+            "destinationAddressPrefix": "*",
+            "access": "Allow",
+            "priority": 112,
+            "direction": "Inbound",
+            "sourcePortRanges": [],
+            "destinationPortRanges": [],
+            "sourceAddressPrefixes": [],
+            "destinationAddressPrefixes": []
+             }
+           }
         ]
       }
     }

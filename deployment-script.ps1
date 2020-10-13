@@ -1,5 +1,15 @@
 #Logging in into Azure 
+#Login-AzAccount
 Login-AzureRmAccount 
+
+#$mngmtgroup = Read-Host "What is the name of the Management Group and deployment that you what to deploy ?"
+#$location = Read-Host "What is the desired location? Examples: eastus"
+
+#New-AzureManagementGroupDeployment `
+#  -Name $mngmtgroup `
+#  -Location $location `
+#  -ManagementGroupId $mngmtgroup `
+#  -TemplateUri "https://raw.githubusercontent.com/Azure/azure-docs-json-samples/master/management-level-deployment/azuredeploy.json"
 
 #Prompts the user what the name of the rg is and where it should create it
 $rg = Read-Host "Please tell us how should the Resource Group be called ?"
