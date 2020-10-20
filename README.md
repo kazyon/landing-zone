@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-# landing-zone
-=======
 # Landing Zone repo
 
 This repo will deploy to any subscription the following components: 
@@ -29,4 +26,3 @@ Order of execution when deploying the Landing Zone
 5. Creating the Recovery Service Vault
 6. Creating of the Storage Account
 7. Creating the Log Analytics Workspace
->>>>>>> c8b3781ce97d3622bbd295380dcc4d494cdf88f6
