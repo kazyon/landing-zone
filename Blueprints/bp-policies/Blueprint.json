@@ -1,0 +1,27 @@
+{
+  "properties": {
+    "targetScope": "subscription",
+    "parameters": {
+      "networkWatchershouldbeenabled_resourceGroupName": {
+        "type": "string",
+        "metadata": {
+          "displayName": "NetworkWatcher resource group name (Policy: Network Watcher should be enabled)"
+        },
+        "defaultValue": "NetworkWatcherRG",
+        "allowedValues": []
+      },
+      "diskencryptionshouldbeappliedonvirtualmachines_effect": {
+        "type": "string",
+        "metadata": {
+          "displayName": "Effect (Policy: Disk encryption should be applied on virtual machines)"
+        },
+        "defaultValue": "AuditIfNotExists",
+        "allowedValues": [
+          "AuditIfNotExists",
+          "Disabled"
+        ]
+      }
+    },
+    "resourceGroups": {}
+  }
+}
