@@ -23,13 +23,18 @@ Example:
 -ukwest = UK West
 -westeurope = West Europe "
 Write-Host "  "
+
+
+
 #----------------------------------------Creation of the RG----------------------------------------#
 #Creation of the Resource Group at the specified location
 Write-Host "Creating the Resource Group at the specified location"
 Write-Host "====================================================="
 New-AzureRMResourceGroup -Name $rg -Location $location
 
-#----------------------------------------Creation of Vnet----------------------------------------#
+New-AzureRmResourceGroupDeployment -ResourceGroupName $rg -Location $location -TemplateFile .\Modules\KeyVault\keyvault.json
+
+<# #----------------------------------------Creation of Vnet----------------------------------------#
 #Deployment of the Network Components
 Write-Host "Creating the Network Component - VNET"
 Write-Host "====================================="
@@ -60,4 +65,4 @@ Write-Host "===================================="
 New-AzureRmResourceGroupDeployment -ResourceGroupName $rg -Location $location -TemplateParameterFile .\Modules\LogAnalytics\loganalyticsworkspace.parameters.json -TemplateFile .\Modules\LogAnalytics\loganalyticsworkspace.json
 
 Write-Host "==================================================================================================="
-Write-Host "Deployment of the resources is ready, wait 2-5 minutes in order for them to be created and deployed"
+Write-Host "Deployment of the resources is ready, wait 2-5 minutes in order for them to be created and deployed" #>

@@ -1,6 +1,7 @@
 #----------------------------------------Shows the user what resource groups are available----------------------------------------#
 Write-Host "Logging into Azure AD"
 Write-Host "====================="
+Connect-AzureRmAccount
 Get-AzureRmResourceGroup 
 
 #----------------------------------------User Input----------------------------------------#
