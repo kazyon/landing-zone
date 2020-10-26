@@ -35,7 +35,7 @@
             ]
         },
         "rgName": {
-            "value": "" // TODO: Fill in parameter value
+            "value": "" // TODO: Fill in parameter value - if not defined it will be deployed on the subscription level
         }
     }
 }
