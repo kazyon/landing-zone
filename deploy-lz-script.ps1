@@ -5,17 +5,6 @@ Write-Host "====================="
 
 Login-AzureRmAccount
 
-#----------------------------Selecting subscription-------------------------------#
-Get-AzSubscription | Format-Table Name, State, SubscriptionID, TenantId
-
-Write-Host "What subscription would you chose ?"
-Write-Host "==================================="
-$subscriptionname = Read-Host "Input the exact name of the subscription in this field"
-
-Write-Host "Setting the selected subscription $subscriptionname as working subscription"
-Write-host "==========================================================================="
-Set-AzContext -SubscriptionName "$subscriptionname"
-
 #----------------------------------------Prompting the user for name and location----------------------------------------#
 #Prompts the user what the name of the rg is and where it should create it
 Write-Host "Prompting the user for Resource Group Name and Location"
