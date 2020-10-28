@@ -1,15 +1,22 @@
+
 #----------------------------------------Logging in Azure----------------------------------------#
 Write-Host "Logging into Azure AD"
 Write-Host "====================="
-<# Login-AzureRmAccount  #>
-Connect-AzAccount
 
-Write-Host "Adere subscription to Azure LightHouse"
-<# <# Get-AzureSubscription #> #list them and prompt for a choise  #>
-New-AzSubscriptionDeployment -Name Azure_lighthouse -Location eastus -TemplateParameterFile .\Modules\Azure_lighthouse\azure-ligh.parameters.json -TemplateFile .\Modules\Azure_lighthouse\azure-ligh.json
+Login-AzureRmAccount
 
-<# #----------------------------------------Prompting the user for name and location----------------------------------------#
+#----------------------------Selecting subscription-------------------------------#
+Get-AzSubscription | Format-Table Name, State, SubscriptionID, TenantId
 
+Write-Host "What subscription would you chose ?"
+Write-Host "==================================="
+$subscriptionname = Read-Host "Input the exact name of the subscription in this field"
+
+Write-Host "Setting the selected subscription $subscriptionname as working subscription"
+Write-host "==========================================================================="
+Set-AzContext -SubscriptionName "$subscriptionname"
+
+#----------------------------------------Prompting the user for name and location----------------------------------------#
 #Prompts the user what the name of the rg is and where it should create it
 Write-Host "Prompting the user for Resource Group Name and Location"
 Write-Host "======================================================="
@@ -28,20 +35,19 @@ Example:
 -ukwest = UK West
 -westeurope = West Europe "
 Write-Host "  "
- #>
-
-
-<# #----------------------------------------Creation of the RG----------------------------------------#
+#----------------------------------------Creation of the RG----------------------------------------#
 #Creation of the Resource Group at the specified location
 Write-Host "Creating the Resource Group at the specified location"
 Write-Host "====================================================="
-New-AzureRMResourceGroup -Name $rg -Location $location #>
+New-AzureRMResourceGroup -Name $rg -Location $location
 
-
-<# 
+#----------------------------------------Creation of KeyVault----------------------------------------#
+#Deployment of the KeyVault
+Write-Host "Creating the KeyVault"
+Write-Host "====================================="
 New-AzureRmResourceGroupDeployment -ResourceGroupName $rg -Location $location -TemplateFile .\Modules\KeyVault\keyvault.json
- #>
-<# #----------------------------------------Creation of Vnet----------------------------------------#
+
+#----------------------------------------Creation of Vnet----------------------------------------#
 #Deployment of the Network Components
 Write-Host "Creating the Network Component - VNET"
 Write-Host "====================================="
@@ -51,7 +57,7 @@ New-AzureRmResourceGroupDeployment -ResourceGroupName $rg -Location $location -T
 #Deployment of the Network Security Group
 Write-Host "Creating the Network Component - Network Security Group"
 Write-Host "======================================================="
-New-AzureRmResourceGroupDeployment -ResourceGroupName $rg -TemplateFile .\Modules\NetworkSecurityGroup\networksecuritygroup.json
+New-AzureRmResourceGroupDeployment -ResourceGroupName $rg -Location $location -TemplateFile .\Modules\NetworkSecurityGroup\networksecuritygroup.json
 
 #----------------------------------------Creation of Recovery Vault----------------------------------------#
 #Deployment of the Recovery Service Vault
@@ -72,4 +78,7 @@ Write-Host "===================================="
 New-AzureRmResourceGroupDeployment -ResourceGroupName $rg -Location $location -TemplateParameterFile .\Modules\LogAnalytics\loganalyticsworkspace.parameters.json -TemplateFile .\Modules\LogAnalytics\loganalyticsworkspace.json
 
 Write-Host "==================================================================================================="
-Write-Host "Deployment of the resources is ready, wait 2-5 minutes in order for them to be created and deployed" #>
+Write-Host "Deployment of the resources is ready, wait 2-5 minutes in order for them to be created and deployed"
+
+
+
