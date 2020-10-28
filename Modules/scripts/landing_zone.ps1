@@ -1,47 +1,10 @@
-#----------------------------------------Logging in Azure----------------------------------------#
-Write-Host "Logging into Azure AD"
-Write-Host "====================="
-<# Login-AzureRmAccount  #>
-Connect-AzAccount
-
-Write-Host "Adere subscription to Azure LightHouse"
-<# <# Get-AzureSubscription #> #list them and prompt for a choise  #>
-New-AzSubscriptionDeployment -Name Azure_lighthouse -Location eastus -TemplateParameterFile .\Modules\Azure_lighthouse\azure-ligh.parameters.json -TemplateFile .\Modules\Azure_lighthouse\azure-ligh.json
-
-<# #----------------------------------------Prompting the user for name and location----------------------------------------#
-
-#Prompts the user what the name of the rg is and where it should create it
-Write-Host "Prompting the user for Resource Group Name and Location"
-Write-Host "======================================================="
-$rg = Read-Host "What is the name of the Resource Group where you want to deploy the Landing-Zone ?"
-$location = Read-Host "Where would you like to deploy the RG and Landing-zone? 
-Example:
--eastus = East US
--eastus2 = East US 2
--northcentralus = North Central US
--centralus = Central US
--westus = West US
--westus2 = West US 2
--westcentralus = West Central US
--canadacentral = Canada Central
--uksouth = UK South
--ukwest = UK West
--westeurope = West Europe "
-Write-Host "  "
- #>
-
-
-<# #----------------------------------------Creation of the RG----------------------------------------#
-#Creation of the Resource Group at the specified location
-Write-Host "Creating the Resource Group at the specified location"
-Write-Host "====================================================="
-New-AzureRMResourceGroup -Name $rg -Location $location #>
-
-
-<# 
+#----------------------------------------Creation of KeyVault----------------------------------------#
+#Deployment of the KeyVault
+Write-Host "Creating the KeyVault"
+Write-Host "====================================="
 New-AzureRmResourceGroupDeployment -ResourceGroupName $rg -Location $location -TemplateFile .\Modules\KeyVault\keyvault.json
- #>
-<# #----------------------------------------Creation of Vnet----------------------------------------#
+
+#----------------------------------------Creation of Vnet----------------------------------------#
 #Deployment of the Network Components
 Write-Host "Creating the Network Component - VNET"
 Write-Host "====================================="
@@ -72,4 +35,4 @@ Write-Host "===================================="
 New-AzureRmResourceGroupDeployment -ResourceGroupName $rg -Location $location -TemplateParameterFile .\Modules\LogAnalytics\loganalyticsworkspace.parameters.json -TemplateFile .\Modules\LogAnalytics\loganalyticsworkspace.json
 
 Write-Host "==================================================================================================="
-Write-Host "Deployment of the resources is ready, wait 2-5 minutes in order for them to be created and deployed" #>
+Write-Host "Deployment of the resources is ready, wait 2-5 minutes in order for them to be created and deployed"

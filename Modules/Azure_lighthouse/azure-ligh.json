@@ -8,6 +8,7 @@
                 "description": "Specify a unique name for your offer"
             },
             "defaultValue": "<to be filled out by MSP> Specify a title for your offer"
+
         },
         "mspOfferDescription": {
             "type": "string",
@@ -30,29 +31,26 @@
             },
             "defaultValue": [
                 { 
-                    "principalId": "ee8f6d35-15f2-4252-b1b8-591358e8a244", 
-                    "roleDefinitionId": "acdd72a7-3385-48ef-bd42-f606fba81ae7",
-                    "principalIdDisplayName": "PIM_Group" 
+                    "principalId": "42549f5f-030d-4c1f-a311-3a3c23782f42", 
+                    "roleDefinitionId": "b24988ac-6180-42a0-ab88-20f7382dd24c",
+                    "principalIdDisplayName": "RFA-LHAdmins" 
                 }, 
                 { 
-                    "principalId": "ee8f6d35-15f2-4252-b1b8-591358e8a244", 
-                    "roleDefinitionId": "91c1777a-f3dc-4fae-b103-61d183457e46",
-                    "principalIdDisplayName": "PIM_Group" 
+                    "principalId": "bdf6597d-925b-4782-b390-134b9fc071a6", 
+                    "roleDefinitionId": "acdd72a7-3385-48ef-bd42-f606fba81ae7",
+                    "principalIdDisplayName": "RFA-LHReader" 
                 }   
             ]
-        },
-        "rgName": {
-            "type": "string"
         }              
     },
     "variables": {
         "mspRegistrationName": "[guid(parameters('mspOfferName'))]",
-        "mspAssignmentName": "[guid(parameters('rgName'))]"
+        "mspAssignmentName": "[guid(parameters('mspOfferName'))]"
     },
     "resources": [
         {
             "type": "Microsoft.ManagedServices/registrationDefinitions",
-            "apiVersion": "2019-06-01",
+            "apiVersion": "2019-09-01",
             "name": "[variables('mspRegistrationName')]",
             "properties": {
                 "registrationDefinitionName": "[parameters('mspOfferName')]",
@@ -62,30 +60,14 @@
             }
         },
         {
-            "type": "Microsoft.Resources/deployments",
-            "apiVersion": "2018-05-01",
-            "name": "rgAssignment",
-            "resourceGroup": "[parameters('rgName')]",
+            "type": "Microsoft.ManagedServices/registrationAssignments",
+            "apiVersion": "2019-09-01",
+            "name": "[variables('mspAssignmentName')]",
             "dependsOn": [
                 "[resourceId('Microsoft.ManagedServices/registrationDefinitions/', variables('mspRegistrationName'))]"
             ],
-            "properties":{
-                "mode":"Incremental",
-                "template":{
-                    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
-                    "contentVersion": "1.0.0.0",
-                    "parameters": {},
-                    "resources": [
-                        {
-                            "type": "Microsoft.ManagedServices/registrationAssignments",
-                            "apiVersion": "2019-06-01",
-                            "name": "[variables('mspAssignmentName')]",
-                            "properties": {
-                                "registrationDefinitionId": "[resourceId('Microsoft.ManagedServices/registrationDefinitions/', variables('mspRegistrationName'))]"
-                            }
-                        }
-                    ]
-                }
+            "properties": {
+                "registrationDefinitionId": "[resourceId('Microsoft.ManagedServices/registrationDefinitions/', variables('mspRegistrationName'))]"
             }
         }
     ],
