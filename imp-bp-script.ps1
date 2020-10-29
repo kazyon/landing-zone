@@ -1,6 +1,6 @@
 #----------------------------------------Login-AzureRmAccount----------------------------------------#
 Write-Host "Login-AzureRmAccount"
-Connect-AzAccount
+Login-AzureRmAccount
 
 #----------------------------------------Importing the BP from source----------------------------------------#
 Write-Host "Importing the BluePrint from source"
