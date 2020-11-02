@@ -26,8 +26,8 @@
                 {
                     "principalId": "975e3236-c6d4-41d3-8192-9513a0c3ed88",
                     "principalIdDisplayName": "Morpheus",
-                    "roleDefinitionId": "b24988ac-6180-42a0-ab88-20f7382dd24c"
-                }     
+                    "roleDefinitionId": "b24988ac-6180-42a0-ab88-20f7382dd24c"      
+                } 
             ]
         }
     }

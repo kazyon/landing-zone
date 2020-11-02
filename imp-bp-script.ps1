@@ -1,5 +1,6 @@
 #----------------------------------------Login-AzureRmAccount----------------------------------------#
-Write-Host "Login-AzureRmAccount"
+Write-Host "Connecting to Azure"
+Write-Host "==================="
 Login-AzureRmAccount
 
 #----------------------------------------Importing the BP from source----------------------------------------#
