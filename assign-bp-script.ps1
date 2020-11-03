@@ -1,12 +1,3 @@
-Write-Host "Checking version of Module"
-Write-Host "====================="
-
-if ($PSVersionTable.PSEdition -eq 'Desktop' -and (Get-Module -Name Az.Blueprint -ListAvailable)) {
-    Write-Warning -Message ('Az module not installed. Having both the AzureRM and ' +
-      'Az modules installed at the same time is not supported.')
-} else {
-    Install-Module -Name Az.Blueprint -AllowClobber -Scope CurrentUser
-}
 
 #---------------------------------------Connecting to Azure AD----------------------------------------#
 Write-Host "Connecting to Azure AD"
