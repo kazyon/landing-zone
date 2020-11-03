@@ -76,7 +76,7 @@
       "location": "[parameters('location')]",
       "properties": {
         "sku": {
-          "name": "[parameters('sku')]"
+          "name": "[parameters('sku_log')]"
         },
         "retentionInDays": "[parameters('retentionInDays')]",
         "features": {
