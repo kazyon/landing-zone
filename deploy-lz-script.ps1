@@ -80,7 +80,7 @@ Write-Host "Creating the Log Analytics Workspace"
 Write-Host "===================================="
 
 
-New-AzureRmResourceGroupDeployment -ResourceGroupName $rg -Location $location -sku_log Standalone -TemplateParameterFile .\Modules\LogAnalytics\loganalyticsworkspace.parameters.json -TemplateFile .\Modules\LogAnalytics\loganalyticsworkspace.json
+New-AzureRmResourceGroupDeployment -ResourceGroupName $rg -Location $location -TemplateParameterFile .\Modules\LogAnalytics\loganalyticsworkspace.parameters.json -TemplateFile .\Modules\LogAnalytics\loganalyticsworkspace.json
 
 Write-Host "==================================================================================================="
 Write-Host "Deployment of the resources is ready, wait 2-5 minutes in order for them to be created and deployed"
