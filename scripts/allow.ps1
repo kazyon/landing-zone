@@ -1,1 +1,0 @@
-$retentiondays = Read-Host "bla bla bla"
